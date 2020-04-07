@@ -3,6 +3,8 @@ from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from .managers import AdjustedUserManager
+
 
 # Create your models here.
 class User(AbstractUser):
@@ -23,7 +25,7 @@ class User(AbstractUser):
     email = models.EmailField(_('email address'), primary_key=True)
     photo = models.ImageField(blank=True)
 
-    objects = ""
+    objects = AdjustedUserManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

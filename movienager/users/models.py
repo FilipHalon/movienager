@@ -8,6 +8,13 @@ from .managers import AdjustedUserManager
 
 # Create your models here.
 class User(AbstractUser):
+    REGULAR_USER = 1
+    ADMIN = 2
+    TYPES = (
+        (REGULAR_USER, 'Regular user'),
+        (ADMIN, 'Admin')
+    )
+
     username = models.CharField(
         _('username'),
         max_length=30,
@@ -24,6 +31,7 @@ class User(AbstractUser):
     last_name = models.CharField(_('last name'), max_length=30, blank=True)
     email = models.EmailField(_('email address'), primary_key=True)
     photo = models.ImageField(blank=True)
+    user_type = models.PositiveSmallIntegerField(choices=TYPES, default=REGULAR_USER)
 
     objects = AdjustedUserManager()
 

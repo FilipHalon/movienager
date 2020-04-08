@@ -1,5 +1,6 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, Permission
 from django.contrib.auth.validators import UnicodeUsernameValidator
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -42,3 +43,11 @@ class User(AbstractUser):
         permissions = (
             ("manage", "Can get access to the list of users, and add, edit and delete them")
         )
+
+    def grant_permission(self, user, codename="manage"):
+        content_type = ContentType.objects.get_for_model(self)
+        permission = Permission.objects.get(
+            codename=codename,
+            content_type=content_type
+        )
+        user.user_permission.add(permission)

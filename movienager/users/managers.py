@@ -12,6 +12,8 @@ class AdjustedUserManager(UserManager):
         user = self.model(email=email, username=username, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
+        if user.user_type == self.model.ADMIN:
+            self.model.grant_permission(user)
         return user
 
     def create_user(self, username, email, password=None, **extra_fields):

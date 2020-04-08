@@ -41,7 +41,7 @@ class User(AbstractUser):
 
     class Meta:
         permissions = (
-            ("manage", "Can list, add, edit and delete users")
+            ("manage", "Can list, add, edit and delete users"),
         )
 
     def save(self, *args, **kwargs):
@@ -59,6 +59,6 @@ class User(AbstractUser):
             content_type=content_type
         )
         if method == "grant":
-            user.user_permission.add(permission)
+            user.user_permissions.add(permission)
         elif method == "revoke":
-            user.user_permission.remove(permission)
+            user.user_permissions.remove(permission)

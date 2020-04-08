@@ -37,3 +37,8 @@ class User(AbstractUser):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
+
+    class Meta:
+        permissions = (
+            ("manage", "Can get access to the list of users, and add, edit and delete them")
+        )

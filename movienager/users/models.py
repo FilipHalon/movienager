@@ -44,8 +44,14 @@ class User(AbstractUser):
             ("manage", "Can get access to the list of users, and add, edit and delete them")
         )
 
-    def grant_permission(self, user, codename="manage"):
-        content_type = ContentType.objects.get_for_model(self)
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.user_type == self.ADMIN:
+            self.grant_permission(self)
+
+    @classmethod
+    def grant_permission(cls, user, codename="manage"):
+        content_type = ContentType.objects.get_for_model(cls)
         permission = Permission.objects.get(
             codename=codename,
             content_type=content_type

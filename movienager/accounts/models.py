@@ -47,13 +47,18 @@ class User(AbstractUser):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         if self.user_type == self.ADMIN:
-            self.grant_permission(self)
+            self.change_permission(self)
+        else:
+            self.change_permission(self, method="revoke")
 
     @classmethod
-    def grant_permission(cls, user, codename="manage"):
+    def change_permission(cls, user, perm_codename="manage", method="grant"):
         content_type = ContentType.objects.get_for_model(cls)
         permission = Permission.objects.get(
-            codename=codename,
+            codename=perm_codename,
             content_type=content_type
         )
-        user.user_permission.add(permission)
+        if method == "grant":
+            user.user_permission.add(permission)
+        elif method == "revoke":
+            user.user_permission.remove(permission)

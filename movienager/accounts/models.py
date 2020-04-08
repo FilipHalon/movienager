@@ -41,7 +41,7 @@ class User(AbstractUser):
 
     class Meta:
         permissions = (
-            ("manage", "Can list, add, edit and delete users"),
+            ("manage user", "Can list, add, edit and delete users"),
         )
 
     def save(self, *args, **kwargs):

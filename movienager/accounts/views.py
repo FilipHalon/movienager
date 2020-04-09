@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.views import LoginView, LogoutView
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.urls import reverse
 from django.views import generic
 
 import accounts.forms as forms
@@ -28,4 +29,16 @@ class UserLogoutView(LogoutView):
 
 class UserManagementView(generic.ListView):
     model = User
+    context_object_name = "users"
     template_name = 'user-management.html'
+    extra_context = {"form": forms.UserEditForm}
+
+    def post(self, request, *args, **kwargs):
+        user = User.objects.filter(email=request.POST.get("email"))
+        if len(user) == 1:
+            form = forms.UserEditForm(request.POST)
+            print(form)
+            if form.is_valid():
+                user.update(**form.cleaned_data)
+                return redirect(reverse("user_management"))
+        return redirect(reverse("user_management"))

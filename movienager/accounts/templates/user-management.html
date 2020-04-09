@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load widget_tweaks %}
+
 {% block title %}
     User Management
 {% endblock title %}
@@ -8,19 +10,40 @@
     <table>
         <thead>
             <tr>
-                <th>Photo</th>
+                {% comment %} <th>Photo</th> {% endcomment %}
                 <th>Username</th>
                 <th>E-mail</th>
-                <th>First name</th>
+                {% comment %} <th>First name</th>
                 <th>Last name</th>
                 <th>User type</th>
                 <th>Is staff</th>
                 <th>Is active</th>
                 <th>Is superuser</th>
                 <th>Date joined</th>
-                <th>Last login</th>
-                <th>Password</th>
+                <th>Last login</th> {% endcomment %}
+                {% comment %} <th>Password</th> {% endcomment %}
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
         </thead>
+        <tbody>
+            {% for user in users %}
+                <form action="" method="POST">
+                {% csrf_token %}
+                <tr>
+                    {% comment %} <td> {% render_field form.photo value=user.photo %} </td> {% endcomment %}
+                    <td> {% render_field form.username value=user.username %} </td>
+                    <td> {% render_field form.email value=user.email %} </td>
+                    {% comment %} <td> {% render_field form.first_name value=user.first_name %} </td>
+                    <td> {% render_field form.last_name value=user.last_name %} </td>
+                    <td> {% render_field form.user_type value=user.user_type %} </td>
+                    <td> {% render_field form.is_staff value=user.photo %} </td> {% endcomment %}
+                    {% comment %} <td> {% render_field form.password value=user.password %} </td> {% endcomment %}
+                    <td><button type="submit">Submit</button></td>
+                    <td><button type="submit" name="delete">Delete</button></td>
+                </tr>
+                </form>
+            {% endfor %}
+        </tbody>
     </table>
 {% endblock body %}

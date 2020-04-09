@@ -52,7 +52,7 @@ class User(AbstractUser):
             self.change_permission(self, method="revoke")
 
     @classmethod
-    def change_permission(cls, user, perm_codename="manage", method="grant"):
+    def change_permission(cls, user, perm_codename="manage user", method="grant"):
         content_type = ContentType.objects.get_for_model(cls)
         permission = Permission.objects.get(
             codename=perm_codename,

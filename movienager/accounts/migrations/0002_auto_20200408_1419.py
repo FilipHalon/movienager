@@ -6,17 +6,17 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('accounts', '0001_initial'),
+        ("accounts", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='user',
-            options={'permissions': (('manage user', 'Can list, add, edit and delete users'),)},
+            name="user",
+            options={
+                "permissions": (
+                    ("manage user", "Can list, add, edit and delete users"),
+                )
+            },
         ),
-        migrations.AlterModelManagers(
-            name='user',
-            managers=[
-            ],
-        ),
+        migrations.AlterModelManagers(name="user", managers=[],),
     ]

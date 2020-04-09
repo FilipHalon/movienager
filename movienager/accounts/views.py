@@ -1,4 +1,4 @@
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render
 from django.views import generic
 
@@ -14,3 +14,7 @@ class SignUpView(generic.CreateView):
 
 class SignInView(LoginView):
     template_name = 'sign-in.html'
+
+
+class UserLogoutView(LogoutView):
+    next_page = '/'

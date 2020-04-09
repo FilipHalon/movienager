@@ -6,6 +6,10 @@ import accounts.forms as forms
 
 
 # Create your views here.
+def index(request):
+    return render(request, "base.html")
+
+
 class SignUpView(generic.CreateView):
     form_class = forms.UserRegistrationForm
     template_name = 'sign-up.html'

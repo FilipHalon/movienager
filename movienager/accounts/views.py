@@ -1,8 +1,10 @@
+from django.conf import settings
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render
 from django.views import generic
 
 import accounts.forms as forms
+from accounts.models import User
 
 
 # Create your views here.
@@ -22,3 +24,8 @@ class SignInView(LoginView):
 
 class UserLogoutView(LogoutView):
     next_page = '/'
+
+
+class UserManagementView(generic.ListView):
+    model = User
+    template_name = 'user-management.html'

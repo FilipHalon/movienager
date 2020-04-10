@@ -33,12 +33,26 @@ class UserManagementView(generic.ListView):
     template_name = 'user-management.html'
     extra_context = {"form": forms.UserEditForm}
 
+    @staticmethod
+    def render_if_form_error(request, error_message):
+        context = {"form": forms.UserEditForm, "users": User.objects.all(), "error": error_message}
+        return render(request, 'user-management.html', context)
+
     def post(self, request, *args, **kwargs):
         user = User.objects.filter(email=request.POST.get("email"))
         if len(user) == 1:
-            form = forms.UserEditForm(request.POST)
-            print(form)
-            if form.is_valid():
-                user.update(**form.cleaned_data)
-                return redirect(reverse("user_management"))
-        return redirect(reverse("user_management"))
+            if "delete" in request.POST:
+                user.delete()
+            username=request.POST.get("username")
+            if user.filter(username=username) or len(User.objects.filter(username=username)) == 0:
+                form = forms.UserEditForm(request.POST)
+                print(form)
+                if form.is_valid():
+                    password = form.cleaned_data.pop('password')
+                    if password:
+                        user.set_password(password)
+                    user.update(**form.cleaned_data)
+                    return redirect("user_management")
+                return self.render_if_form_error(request, "The provided data was not correct.")
+            return self.render_if_form_error(request, "A user with this username already exists.")
+        return self.render_if_form_error(request, "Changing an e-mail is not allowed.")

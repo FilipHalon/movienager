@@ -7,21 +7,23 @@
 {% endblock title %}
 
 {% block body %}
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
     <table>
         <thead>
             <tr>
-                {% comment %} <th>Photo</th> {% endcomment %}
-                <th>Username</th>
                 <th>E-mail</th>
-                {% comment %} <th>First name</th>
+                <th>Username</th>
+                <th>First name</th>
                 <th>Last name</th>
-                <th>User type</th>
+                <th>Joined</th>
                 <th>Is staff</th>
-                <th>Is active</th>
                 <th>Is superuser</th>
-                <th>Date joined</th>
-                <th>Last login</th> {% endcomment %}
-                {% comment %} <th>Password</th> {% endcomment %}
+                <th>User type</th>
+                <th>Is active</th>
+                <th>Last login</th>
+                <th>Password</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -31,15 +33,18 @@
                 <form action="" method="POST">
                 {% csrf_token %}
                 <tr>
-                    {% comment %} <td> {% render_field form.photo value=user.photo %} </td> {% endcomment %}
-                    <td> {% render_field form.username value=user.username %} </td>
                     <td> {% render_field form.email value=user.email %} </td>
-                    {% comment %} <td> {% render_field form.first_name value=user.first_name %} </td>
+                    <td> {% render_field form.username value=user.username %} </td>
+                    <td> {% render_field form.first_name value=user.first_name %} </td>
                     <td> {% render_field form.last_name value=user.last_name %} </td>
+                    <td> {{ user.date_joined }} </td>
+                    <td> {% render_field form.is_staff value=user.is_staff %} </td>
+                    <td> {% render_field form.is_superuser value=user.is_superuser %} </td>
                     <td> {% render_field form.user_type value=user.user_type %} </td>
-                    <td> {% render_field form.is_staff value=user.photo %} </td> {% endcomment %}
-                    {% comment %} <td> {% render_field form.password value=user.password %} </td> {% endcomment %}
-                    <td><button type="submit">Submit</button></td>
+                    <td> {% render_field form.is_active value=user.is_active %} </td>
+                    <td> {{ user.last_login }} </td>
+                    <td> {% render_field form.password placeholder="Enter a new password." %} </td>
+                    <td><button type="submit" name="edit">Edit</button></td>
                     <td><button type="submit" name="delete">Delete</button></td>
                 </tr>
                 </form>

@@ -11,28 +11,16 @@ class UserRegistrationForm(UserCreationForm):
         model = User
         fields = ('username', 'email')
 
+
 class UserEditForm(UserChangeForm):
-    password = None
-    exclude = ["email"]
+    password = forms.CharField(max_length=128, required=False)
 
     class Meta:
         model = User
-        fields = ('username', 'email')
+        exclude = ('photo', 'last_login', 'date_joined', 'user_permissions', 'groups')
         widgets = {
             'email': forms.EmailInput(attrs={'readonly': 'readonly'})
             }
     
-    def validate_unique(self):
-        """
-        Call the instance's validate_unique() method and update the form's
-        validation errors if any were raised.
-        """
-        exclude = self._get_validation_exclusions()
-        print(exclude)
-        exclude.append("email")
-        print(exclude)
-        try:
-            self.instance.validate_unique(exclude=exclude)
-        except ValidationError as e:
-            self._update_errors(e)
-
+    def clean(self):
+        return self.cleaned_data

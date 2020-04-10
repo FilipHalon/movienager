@@ -31,11 +31,11 @@ class UserManagementView(generic.ListView):
     model = User
     context_object_name = "users"
     template_name = 'user-management.html'
-    extra_context = {"form": forms.UserEditForm}
+    extra_context = {"form": forms.UserEditForm, "choices": User.TYPES}
 
-    @staticmethod
-    def render_if_form_error(request, error_message):
-        context = {"form": forms.UserEditForm, "users": User.objects.all(), "error": error_message}
+    def render_if_form_error(self, request, error_message):
+        context = {"users": User.objects.all(), "error": error_message}
+        context.update(self.extra_context)
         return render(request, 'user-management.html', context)
 
     def post(self, request, *args, **kwargs):
@@ -48,9 +48,11 @@ class UserManagementView(generic.ListView):
                 form = forms.UserEditForm(request.POST)
                 print(form)
                 if form.is_valid():
+                    print(form.cleaned_data)
                     password = form.cleaned_data.pop('password')
                     if password:
-                        user.set_password(password)
+                        user[0].set_password(password)
+                        user[0].save()
                     user.update(**form.cleaned_data)
                     return redirect("user_management")
                 return self.render_if_form_error(request, "The provided data was not correct.")

@@ -12,7 +12,7 @@ class UserRegistrationForm(UserCreationForm):
         fields = ('username', 'email')
 
 
-class UserEditForm(UserChangeForm):
+class UserEditForm(forms.ModelForm):
     password = forms.CharField(max_length=128, required=False)
 
     class Meta:

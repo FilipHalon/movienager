@@ -27,6 +27,12 @@ class UserLogoutView(LogoutView):
     next_page = '/'
 
 
+class UserListView(generic.ListView):
+    model = User
+    context_object_name = "users"
+    template_name = 'user-list.html'
+
+
 class UserManagementView(generic.ListView):
     model = User
     context_object_name = "users"

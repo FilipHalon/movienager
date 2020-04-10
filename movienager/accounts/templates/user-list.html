@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    User List
+{% endblock title %}
+
+{% block body %}
+    <table>
+        {% include 'partials/user-list-thead.html' %}
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.first_name }}</td>
+                    <td>{{ user.last_name }}</td>
+                    <td>{{ user.date_joined }}</td>
+                    <td>{{ user.is_staff }}</td>
+                    <td>{{ user.is_superuser }}</td>
+                    <td>{{ user.get_user_type_display }}</td>
+                    <td>{{ user.is_active }}</td>
+                    <td>{{ user.last_login }}</td>
+                    <td><a href=""><button>Edit</button></a></td>
+                    <td><a href=""><button>Delete</button></a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock body %}

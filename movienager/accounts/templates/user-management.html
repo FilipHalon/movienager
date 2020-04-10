@@ -11,23 +11,7 @@
         <p>{{ error }}</p>
     {% endif %}
     <table>
-        <thead>
-            <tr>
-                <th>E-mail</th>
-                <th>Username</th>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Joined</th>
-                <th>Is staff</th>
-                <th>Is superuser</th>
-                <th>User type</th>
-                <th>Is active</th>
-                <th>Last login</th>
-                <th>Password</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
+        {% include 'partials/user-list-thead.html' with management_view=True %}
         <tbody>
             {% for user in users %}
                 <form action="" method="POST">

@@ -5,10 +5,9 @@
 {% endblock title %}
 
 {% block body %}
-    <form method="post">
-    {% csrf_token %}
-        <p>Are you sure you want to delete the user {{ object }}?</p>
-        <button type="submit">Yes</button>
-    </form>
+        <form rm method="post">
+        {% csrf_token %}
+            <p>Are you sure you want to delete the user {{ object }}?</p>
+            <button type="submit">Yes</button>
+        </form>
 {% endblock body %}
-~

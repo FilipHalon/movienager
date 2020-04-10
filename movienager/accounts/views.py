@@ -43,7 +43,7 @@ class UserEditView(generic.UpdateView):
 class UserDeleteView(generic.DeleteView):
     model = User
     template_name = 'user-delete.html'
-    success_url = '/user-list'
+    success_url = '/user_list'
 
 
 class UserManagementView(generic.ListView):

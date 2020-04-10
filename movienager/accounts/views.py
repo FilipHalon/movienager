@@ -33,6 +33,13 @@ class UserListView(generic.ListView):
     template_name = 'user-list.html'
 
 
+class UserEditView(generic.UpdateView):
+    model = User
+    template_name = 'user-edit.html'
+    success_url = '/user_list'
+    form_class = forms.UserExtendedEditForm
+
+
 class UserManagementView(generic.ListView):
     model = User
     context_object_name = "users"

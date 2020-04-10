@@ -24,3 +24,8 @@ class UserEditForm(forms.ModelForm):
     
     def clean(self):
         return self.cleaned_data
+
+
+class UserExtendedEditForm(forms.ModelForm):
+    class Meta(UserEditForm.Meta):
+        exclude = ('last_login', 'groups', 'date_joined')

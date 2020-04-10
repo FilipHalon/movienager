@@ -16,11 +16,13 @@ def index(request):
 class SignUpView(generic.CreateView):
     form_class = forms.UserRegistrationForm
     template_name = 'sign-up.html'
-    success_url = 'login'
+    success_url = 'signin'
 
 
 class SignInView(LoginView):
     template_name = 'sign-in.html'
+    redirect_authenticated_user = True
+    # success_url = '/'
 
 
 class UserLogoutView(LogoutView):

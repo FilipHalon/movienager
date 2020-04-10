@@ -5,7 +5,7 @@ import accounts.views as views
 urlpatterns = [
     path("", views.index, name="main-page"),
     path("signup", views.SignUpView.as_view()),
-    path("signin", views.SignInView.as_view()),
+    path("signin", views.SignInView.as_view(), name="signin"),
     path("logout", views.UserLogoutView.as_view()),
     path("user_management", views.UserManagementView.as_view(), name="user_management"),
     path("user_list", views.UserListView.as_view()),

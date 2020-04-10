@@ -39,10 +39,15 @@ class User(AbstractUser):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
+        self.set_permission()
+
+
+    def set_permission(self):
         if self.user_type == self.ADMIN:
             self.change_permission(self)
         else:
             self.change_permission(self, method="revoke")
+
 
     @classmethod
     def change_permission(cls, user, perm_codename="manage user", method="grant"):

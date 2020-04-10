@@ -29,3 +29,8 @@ class UserEditForm(forms.ModelForm):
 class UserExtendedEditForm(forms.ModelForm):
     class Meta(UserEditForm.Meta):
         exclude = ('last_login', 'groups', 'date_joined')
+
+    def save(self):
+        self.instance = super().save()
+        self.instance.set_permission()
+        return self.instance

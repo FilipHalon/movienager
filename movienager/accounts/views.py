@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import redirect, render
 from django.urls import reverse
@@ -22,33 +23,37 @@ class SignUpView(generic.CreateView):
 class SignInView(LoginView):
     template_name = 'sign-in.html'
     redirect_authenticated_user = True
-    # success_url = '/'
 
 
 class UserLogoutView(LogoutView):
     next_page = '/'
 
 
-class UserListView(generic.ListView):
+class ManageUsersRequired(PermissionRequiredMixin):
+    login_url = "signin"
+    permission_required = "accounts.manage_user"
+
+
+class UserListView(ManageUsersRequired, generic.ListView):
     model = User
     context_object_name = "users"
     template_name = 'user-list.html'
 
 
-class UserEditView(generic.UpdateView):
+class UserEditView(ManageUsersRequired, generic.UpdateView):
     model = User
     template_name = 'user-edit.html'
     success_url = '/user_list'
     form_class = forms.UserExtendedEditForm
 
 
-class UserDeleteView(generic.DeleteView):
+class UserDeleteView(ManageUsersRequired, generic.DeleteView):
     model = User
     template_name = 'user-delete.html'
     success_url = '/user_list'
 
 
-class UserManagementView(generic.ListView):
+class UserManagementView(ManageUsersRequired, generic.ListView):
     model = User
     context_object_name = "users"
     template_name = 'user-management.html'
@@ -75,6 +80,7 @@ class UserManagementView(generic.ListView):
                         user[0].set_password(password)
                         user[0].save()
                     user.update(**form.cleaned_data)
+                    user[0].set_permission()
                     return redirect("user_management")
                 return self.render_if_form_error(request, "The provided data was not correct.")
             return self.render_if_form_error(request, "A user with this username already exists.")

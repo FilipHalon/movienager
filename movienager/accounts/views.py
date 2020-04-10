@@ -40,6 +40,12 @@ class UserEditView(generic.UpdateView):
     form_class = forms.UserExtendedEditForm
 
 
+class UserDeleteView(generic.DeleteView):
+    model = User
+    template_name = 'user-delete.html'
+    success_url = '/user-list'
+
+
 class UserManagementView(generic.ListView):
     model = User
     context_object_name = "users"

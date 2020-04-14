@@ -37,7 +37,7 @@ class ManageUsersRequired(PermissionRequiredMixin):
 class UserListView(ManageUsersRequired, generic.ListView):
     model = User
     context_object_name = "users"
-    template_name = 'tables.html'
+    template_name = 'user-list.html'
 
 
 class UserEditView(ManageUsersRequired, generic.UpdateView):

@@ -9,6 +9,6 @@ urlpatterns = [
     path("logout", views.UserLogoutView.as_view(), name="logout"),
     path("user_management", views.UserManagementView.as_view(), name="user_management"),
     path("user_list", views.UserListView.as_view(), name="user-list"),
-    re_path(r"^user_edit/(?P<pk>[\w@\.]+$)", views.UserEditView.as_view(), name="user-edit"),
-    re_path(r"^user_delete/(?P<pk>[\w@\.]+$)", views.UserDeleteView.as_view(), name="user-delete")
+    re_path(r"^user_edit/(?P<pk>[\w\-@\._]+$)", views.UserEditView.as_view(), name="user-edit"),
+    re_path(r"^user_delete/(?P<pk>[\w\-@\._]+$)", views.UserDeleteView.as_view(), name="user-delete")
 ]

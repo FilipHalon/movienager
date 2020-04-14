@@ -11,7 +11,7 @@
         <p>{{ error }}</p>
     {% endif %}
     <table>
-        {% include 'partials/user-list-thead.html' with management_view=True %}
+        {% include 'partials/user-list-colnames.html' with management_view=True %}
         <tbody>
             {% for user in users %}
                 <form action="" method="POST">

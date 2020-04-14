@@ -1,4 +1,8 @@
+{% if tfoot %}
+<tfoot>
+{% else %}
 <thead>
+{% endif %}
     <tr>
         <th>E-mail</th>
         <th>Username</th>
@@ -14,4 +18,8 @@
         <th>Edit</th>
         <th>Delete</th>
     </tr>
+{% if tfoot %}
+</tfoot>
+{% else %}
 </thead>
+{% endif %}

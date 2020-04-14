@@ -1,7 +1,7 @@
 {% extends 'SB-admin-base.html' %}
 
 {% block title %}
-  User list
+  User management
 {% endblock title %}
 
 {% block body %}
@@ -317,13 +317,15 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-          <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+          <h1 class="h3 mb-2 text-gray-800">User management</h1>
+          <p class="mb-4">Below you will find the list containing all the users in the database. 
+          You can edit their data and delete them using buttons on the right side of the table. 
+          Clicking the buttons will redirect you to a separate page where you can make changes (in the case of clicking an edit button) and confirm or discard your decision.</p>
 
-          <!-- DataTales Example -->
+          <!-- User table -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Users</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -343,8 +345,8 @@
                       <td>{{ user.get_user_type_display }}</td>
                       <td>{{ user.is_active }}</td>
                       <td>{{ user.last_login }}</td>
-                      <td><a href="{% url 'user-edit' user.email %}"><button>Edit</button></a></td>
-                      <td><a href="{% url 'user-delete' user.email %}"><button>Delete</button></a></td>
+                      <td><a href="{% url 'user-edit' user.email %}"><button class="btn btn-outline-info">Edit</button></a></td>
+                      <td><a href="{% url 'user-delete' user.email %}"><button class="btn btn-outline-danger">Delete</button></a></td>
                     </tr>
                     {% endfor %}
                   </tbody>

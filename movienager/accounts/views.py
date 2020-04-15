@@ -13,6 +13,9 @@ from accounts.models import User
 def index(request):
     return render(request, "index.html")
 
+def admin_panel(request):
+    return redirect("admin-panel-user-mng")
+
 
 class SignUpView(generic.CreateView):
     form_class = forms.UserRegistrationForm

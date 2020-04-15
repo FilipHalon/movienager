@@ -20,9 +20,7 @@ from django.urls import path
 
 from accounts.urls import urlpatterns as accounts_urls
 
-urlpatterns = [
-    path("admin/", admin.site.urls),
-] + accounts_urls
+urlpatterns = [path("admin/", admin.site.urls),] + accounts_urls
 
 if settings.DEBUG:
     urlpatterns += static(

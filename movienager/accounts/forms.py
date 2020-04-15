@@ -9,7 +9,7 @@ from accounts.models import User
 class UserRegistrationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ('username', 'email')
+        fields = ("username", "email")
 
 
 class UserEditForm(forms.ModelForm):
@@ -17,18 +17,16 @@ class UserEditForm(forms.ModelForm):
 
     class Meta:
         model = User
-        exclude = ('photo', 'last_login', 'date_joined', 'user_permissions', 'groups')
-        widgets = {
-            'email': forms.EmailInput(attrs={'readonly': 'readonly'})
-            }
-    
+        exclude = ("photo", "last_login", "date_joined", "user_permissions", "groups")
+        widgets = {"email": forms.EmailInput(attrs={"readonly": "readonly"})}
+
     def clean(self):
         return self.cleaned_data
 
 
 class UserExtendedEditForm(forms.ModelForm):
     class Meta(UserEditForm.Meta):
-        exclude = ('last_login', 'groups', 'date_joined')
+        exclude = ("last_login", "groups", "date_joined")
 
     def save(self):
         self.instance = super().save()

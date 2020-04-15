@@ -18,10 +18,15 @@
         <div class="col-xl-11">
           <div class="p-4">
             <div class="text-center">
-              <h1 class="h4 text-gray-900 mb-4">Create an account</h1>
+              <h1 class="h4 text-gray-900 mb-4"> 
+              {% block form_title %}
+                Create an account
+              {% endblock form_title %} 
+              </h1>
             </div>
             <form class="user" method="POST">
               {% csrf_token %}
+              {% block form_content %}
               <div class="form-group">
                 {% render_field form.email class="form-control form-control-user" placeholder="E-mail" %}
                 <small class="form-text text-muted">{{ form.email.help_text }}</small>
@@ -40,13 +45,16 @@
                   <small class="form-text text-muted">{{ form.password2.help_text }}</small>
                 </div>
               </div>
+              {% endblock form_content %}
               <button type="submit" class="btn btn-primary btn-user btn-block">
-                Register
+                {% block button_name %}
+                  Register
+                {% endblock button_name %}
               </button>
             </form>
             <hr>
             <div class="text-center">
-              <a class="small" href={% url 'signin'%}>Sign in instead</a>
+              {% block chng_form_link %}<a class="small" href={% url 'signin'%}>Sign in instead</a>{% endblock chng_form_link %}
             </div>
           </div>
         </div>

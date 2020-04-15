@@ -21,7 +21,7 @@ class SignUpView(generic.CreateView):
 
 
 class SignInView(LoginView):
-    template_name = 'sign-in.html'
+    template_name = 'login.html'
     redirect_authenticated_user = True
 
 

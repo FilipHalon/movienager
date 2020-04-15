@@ -22,7 +22,7 @@ class Movie(models.Model):
     poster = models.ImageField(upload_to=poster_directory_path)
     short_desc = models.CharField(max_length=512)
     starring = models.ManyToManyField(Person, related_name="actors")
-    directed_by = models.ManyToManyField(Person, related_name="directors")
+    directed_by = models.ForeignKey(Person, blank=True, null=True, related_name="directors", on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.title

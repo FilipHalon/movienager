@@ -1,7 +1,9 @@
 from django.db import models
 
+
 def person_photo_directory_path(instance, filename):
     return f"people/{instance.id}/photos/{filename}"
+
 
 def poster_directory_path(instance, filename):
     return f"movies/{instance.id}/posters/{filename}"
@@ -22,7 +24,13 @@ class Movie(models.Model):
     poster = models.ImageField(upload_to=poster_directory_path)
     short_desc = models.CharField(max_length=512)
     starring = models.ManyToManyField(Person, related_name="actors")
-    directed_by = models.ForeignKey(Person, blank=True, null=True, related_name="directors", on_delete=models.SET_NULL)
+    directed_by = models.ForeignKey(
+        Person,
+        blank=True,
+        null=True,
+        related_name="directors",
+        on_delete=models.SET_NULL,
+    )
 
     def __str__(self):
         return self.title

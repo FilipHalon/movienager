@@ -5,9 +5,16 @@
 {% endblock title %}
 
 {% block body %}
+    <section class="container d-flex justify-content-center">
         <form rm method="post">
-        {% csrf_token %}
-            <p>Are you sure you want to delete the user {{ object }}?</p>
-            <button type="submit">Yes</button>
+            {% csrf_token %}
+            <div class="row mt-5">
+                <p class="lead">Are you sure you want to delete the user {{ object }}?</h2>
+            </div>
+            <div class="row">
+                <button type="submit" class="mr-2 btn btn-outline-danger">Yes, delete the user</button>
+                <a href={% url 'admin-panel-user-mng' %} class="btn btn-outline-primary">No, let's not delete the user</a>
+            </div>
         </form>
+    </section>
 {% endblock body %}

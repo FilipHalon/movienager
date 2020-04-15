@@ -8,13 +8,15 @@
           crossorigin="anonymous">
     <title>
     {% block title %}
-    {% endblock %}
+    {% endblock title %}
     </title>
 </head>
 <body>
+    {% block header %}
+    {% endblock header %}
     <main class="container-fluid p-0">
         {% block body %}
-        {% endblock %}
+        {% endblock body %}
     </main>
 </body>
 </html>

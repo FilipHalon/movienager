@@ -26,7 +26,7 @@ class User(AbstractUser):
     first_name = models.CharField(_("first name"), max_length=20, blank=True)
     last_name = models.CharField(_("last name"), max_length=30, blank=True)
     email = models.EmailField(_("email address"), primary_key=True)
-    photo = models.ImageField(blank=True, upload_to="profile_photos/")
+    photo = models.ImageField(blank=True, upload_to="profile_photos")
     user_type = models.PositiveSmallIntegerField(choices=TYPES, default=REGULAR_USER)
 
     objects = AdjustedUserManager()

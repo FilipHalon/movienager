@@ -40,7 +40,10 @@ DJANGO_APPS = [
     'crispy_forms',
 ]
 
-PROJECT_APPS = ["accounts"]
+PROJECT_APPS = [
+    "accounts",
+    "movies"
+    ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
 

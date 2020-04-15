@@ -11,17 +11,17 @@ from accounts.models import User
 
 # Create your views here.
 def index(request):
-    return render(request, "base.html")
+    return render(request, "bases/base.html")
 
 
 class SignUpView(generic.CreateView):
     form_class = forms.UserRegistrationForm
-    template_name = 'register.html'
+    template_name = 'auth_forms/signup.html'
     success_url = 'signin'
 
 
 class SignInView(LoginView):
-    template_name = 'login.html'
+    template_name = 'auth_forms/signin.html'
     redirect_authenticated_user = True
 
 
@@ -29,34 +29,34 @@ class UserLogoutView(LogoutView):
     next_page = '/'
 
 
-class ManageUsersRequired(PermissionRequiredMixin):
+class ManageUserRequired(PermissionRequiredMixin):
     login_url = "signin"
     permission_required = "accounts.manage_user"
 
 
-class UserListView(ManageUsersRequired, generic.ListView):
+class AdminPanelUserMngView(ManageUserRequired, generic.ListView):
     model = User
     context_object_name = "users"
-    template_name = 'user-list.html'
+    template_name = 'user_management/admin-panel-user-mng.html'
 
 
-class UserEditView(ManageUsersRequired, generic.UpdateView):
+class UserEditView(ManageUserRequired, generic.UpdateView):
     model = User
-    template_name = 'user-edit.html'
-    success_url = '/user_list'
+    template_name = 'user_forms/user-edit.html'
+    success_url = '/admin_panel/user_management'
     form_class = forms.UserExtendedEditForm
 
 
-class UserDeleteView(ManageUsersRequired, generic.DeleteView):
+class UserDeleteView(ManageUserRequired, generic.DeleteView):
     model = User
-    template_name = 'user-delete.html'
-    success_url = '/user_list'
+    template_name = 'user_forms/user-delete.html'
+    success_url = '/admin_panel/user_management'
 
 
-class UserManagementView(ManageUsersRequired, generic.ListView):
+class UserManagementView(ManageUserRequired, generic.ListView):
     model = User
     context_object_name = "users"
-    template_name = 'user-management.html'
+    template_name = 'user_management/user-management.html'
     extra_context = {"form": forms.UserEditForm, "choices": User.TYPES}
 
     def render_if_form_error(self, request, error_message):
@@ -81,7 +81,7 @@ class UserManagementView(ManageUsersRequired, generic.ListView):
                         user[0].save()
                     user.update(**form.cleaned_data)
                     user[0].set_permission()
-                    return redirect("user_management")
+                    return redirect("user-management")
                 return self.render_if_form_error(request, "The provided data was not correct.")
             return self.render_if_form_error(request, "A user with this username already exists.")
         return self.render_if_form_error(request, "Changing an e-mail is not allowed.")

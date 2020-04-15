@@ -9,14 +9,14 @@
 {% block body %}
 <body class="bg-gradient-primary">
 
-<div class="container">
+<div class="container d-flex justify-content-center">
 
-  <div class="card o-hidden border-0 shadow-lg my-5">
+  <div class="card o-hidden border-0 shadow-lg my-5 col-lg-8">
     <div class="card-body p-0">
       <!-- Nested Row within Card Body -->
       <div class="row justify-content-center">
-        <div class="col-lg-9">
-          <div class="p-5">
+        <div class="col-xl-11">
+          <div class="p-4">
             <div class="text-center">
               <h1 class="h4 text-gray-900 mb-4">Create an account</h1>
             </div>
@@ -24,16 +24,20 @@
               {% csrf_token %}
               <div class="form-group">
                 {% render_field form.email class="form-control form-control-user" placeholder="E-mail" %}
+                <small class="form-text text-muted">{{ form.email.help_text }}</small>
               </div>
               <div class="form-group">
                 {% render_field form.username class="form-control form-control-user" placeholder="Username" %}
+                <small class="form-text text-muted">{{ form.username.help_text }}</small>
               </div>
               <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
                   {% render_field form.password1 class="form-control form-control-user" placeholder="Password" %}
+                  <small class="form-text text-muted">{{ form.password1.help_text }}</small>
                 </div>
                 <div class="col-sm-6">
                   {% render_field form.password2 class="form-control form-control-user" placeholder="Password confirmation" %}
+                  <small class="form-text text-muted">{{ form.password2.help_text }}</small>
                 </div>
               </div>
               <button type="submit" class="btn btn-primary btn-user btn-block">

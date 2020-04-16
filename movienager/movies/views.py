@@ -25,4 +25,9 @@ class MovieEditView(generic.UpdateView):
     fields = "__all__"
     success_url = "/movies"
     template_name = "movie/forms/movie-edit.html"
-    
+
+
+class MovieDeleteView(generic.DeleteView):
+    model = Movie
+    success_url = "/movies"
+    template_name = "movie/forms/movie-delete.html"

@@ -57,3 +57,8 @@ class PersonDeleteView(generic.DeleteView):
     model = Person
     success_url = "/people"
     template_name = "person/forms/person-delete.html"
+
+
+class PersonView(generic.DetailView):
+    model = Person
+    template_name = "person/person.html"

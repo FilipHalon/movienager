@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+
+{% block title %}
+    Personal details
+{% endblock title %}
+
+{% block body %}
+    <ul>
+        <li><img src={{ person.photo }} alt={{ object.name }}></li>
+        <li>Name: {{ object.name }}</li>
+        <li>Actor in:
+        {% for movie in object.actors.all %}
+            {{ movie.title }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+        </li>
+        <li>Director in:
+        {% for movie in object.director.all %}
+            {{ movie.title }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+        </li>
+    </ul>
+{% endblock body %}

@@ -8,7 +8,7 @@
     {% for person in people %}
     <tr>
         <td><img src="{{ person.poster }}" alt="{{ person.name }}"></td>
-        <td>{{ person.name }}</td>
+        <td><a href={% url 'person' person.id %}>{{ person.name }}</a></td>
         {% block buttons %}
         <td><a href="{% url 'person-edit' person.id %}"><button class="btn btn-outline-info">Edit</button></a></td>
         <td><a href="{% url 'person-delete' person.id %}"><button class="btn btn-outline-danger">Delete</button></a></td>

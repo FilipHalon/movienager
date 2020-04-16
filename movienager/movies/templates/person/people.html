@@ -10,6 +10,7 @@
         <td><img src="{{ person.poster }}" alt="{{ person.name }}"></td>
         <td>{{ person.name }}</td>
         {% block buttons %}
+        <td><a href="{% url 'person-edit' person.id %}"><button class="btn btn-outline-info">Edit</button></a></td>
         {% endblock buttons %}
     </tr>
     {% endfor %}

@@ -45,3 +45,9 @@ class PersonAddView(edit.CreateView):
     success_url = "/people"
     template_name = "person/forms/person-add.html"
 
+
+class PersonEditView(generic.UpdateView):
+    model = Person
+    fields = "__all__"
+    success_url = "/people"
+    template_name = "person/forms/person-edit.html"

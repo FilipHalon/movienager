@@ -19,10 +19,12 @@ from django.contrib import admin
 from django.urls import path
 
 from accounts.urls import urlpatterns as accounts_urls
+from movies.urls import urlpatterns as movies_urls
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-] + accounts_urls
+] + accounts_urls \
+    + movies_urls
 
 if settings.DEBUG:
     urlpatterns += static(

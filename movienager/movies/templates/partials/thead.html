@@ -1,0 +1,9 @@
+{% load get_field_names %}
+
+<thead>
+    <tr>
+    {% for name in obj|get_field_names %}
+        <th>{{ name }}</th>
+    {% endfor %}
+    </tr>
+</thead>

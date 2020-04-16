@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+
+{% block title %}
+    Movies
+{% endblock title %}
+
+{% block body %}
+    <table>
+        {% include 'partials/thead.html' with obj=object_list.0 %}
+        <tbody>
+            {% for movie in movies %}
+            <tr>
+                <td><img src="{{ movie.poster }}" alt="{{ movie.title }}"></td>
+                <td>{{ movie.title }}</td>
+                <td>{{ movie.prod_year }}</td>
+                <td>{{ movie.short_desc }}</td>
+                <td>{{ movie.directed_by }}</td>
+                <td>
+                {% for person in movie.starring.all %}
+                    {{ person.name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock body %}

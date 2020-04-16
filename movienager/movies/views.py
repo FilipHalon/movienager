@@ -18,3 +18,11 @@ class MovieAddView(edit.CreateView):
     fields = "__all__"
     success_url = "/movies"
     template_name = "movie/forms/movie-add.html"
+
+
+class MovieEditView(generic.UpdateView):
+    model = Movie
+    fields = "__all__"
+    success_url = "/movies"
+    template_name = "movie/forms/movie-edit.html"
+    

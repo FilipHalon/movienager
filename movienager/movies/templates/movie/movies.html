@@ -20,6 +20,8 @@
                     {{ person.name }}{% if not forloop.last %}, {% endif %}
                 {% endfor %}
                 </td>
+                <td><a href="{% url 'movie-edit' movie.id %}"><button class="btn btn-outline-info">Edit</button></a></td>
+                {% comment %} <td><a href="{% url 'movie-delete' movie.id %}"><button class="btn btn-outline-danger">Delete</button></a></td> {% endcomment %}
             </tr>
             {% endfor %}
         </tbody>

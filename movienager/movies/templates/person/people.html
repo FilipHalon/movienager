@@ -1,0 +1,16 @@
+{% extends 'movie/movies.html' %}
+
+{% block title %}
+    People
+{% endblock title %}
+
+{% block table_content %}
+    {% for person in people %}
+    <tr>
+        <td><img src="{{ person.poster }}" alt="{{ person.name }}"></td>
+        <td>{{ person.name }}</td>
+        {% block buttons %}
+        {% endblock buttons %}
+    </tr>
+    {% endfor %}
+{% endblock table_content %}

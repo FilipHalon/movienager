@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.views import generic
 from django.views.generic import edit
 
-from movies.models import Movie
+from movies.models import Movie, Person
 
 
 # Create your views here.
@@ -31,3 +31,9 @@ class MovieDeleteView(generic.DeleteView):
     model = Movie
     success_url = "/movies"
     template_name = "movie/forms/movie-delete.html"
+
+
+class PeopleView(generic.ListView):
+    model = Person
+    template_name = "person/people.html"
+    context_object_name = "people"

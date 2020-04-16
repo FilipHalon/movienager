@@ -11,8 +11,8 @@ def poster_directory_path(instance, filename):
 
 # Create your models here.
 class Person(models.Model):
-    photo = models.ImageField(blank=True, upload_to=person_photo_directory_path)
-    name = models.CharField(max_length=128)
+    photo = models.ImageField(blank=True, upload_to=person_photo_directory_path, verbose_name="Photo")
+    name = models.CharField(max_length=128, verbose_name="Name")
 
     def __str__(self):
         return self.name

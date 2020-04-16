@@ -8,6 +8,7 @@
     <table>
         {% include 'partials/thead.html' with obj=object_list.0 %}
         <tbody>
+        {% block table_content %}
             {% for movie in movies %}
             <tr>
                 <td><img src="{{ movie.poster }}" alt="{{ movie.title }}"></td>
@@ -20,10 +21,13 @@
                     {{ person.name }}{% if not forloop.last %}, {% endif %}
                 {% endfor %}
                 </td>
+                {% block buttons %}
                 <td><a href="{% url 'movie-edit' movie.id %}"><button class="btn btn-outline-info">Edit</button></a></td>
                 <td><a href="{% url 'movie-delete' movie.id %}"><button class="btn btn-outline-danger">Delete</button></a></td>
+                {% endblock buttons %}
             </tr>
             {% endfor %}
+        {% endblock table_content %}
         </tbody>
     </table>
 {% endblock body %}

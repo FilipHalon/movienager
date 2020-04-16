@@ -37,3 +37,11 @@ class PeopleView(generic.ListView):
     model = Person
     template_name = "person/people.html"
     context_object_name = "people"
+
+
+class PersonAddView(edit.CreateView):
+    model = Person
+    fields = "__all__"
+    success_url = "/people"
+    template_name = "person/forms/person-add.html"
+

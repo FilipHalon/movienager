@@ -10,4 +10,5 @@ urlpatterns = [
     path("people", views.PeopleView.as_view(), name="people"),
     path("people/add", views.PersonAddView.as_view(), name="person-add"),
     re_path(r"^people/edit/(?P<pk>\d+$)", views.PersonEditView.as_view(), name="person-edit"),
+    re_path(r"^people/delete/(?P<pk>\d+$)", views.PersonDeleteView.as_view(), name="person-delete"),
 ]

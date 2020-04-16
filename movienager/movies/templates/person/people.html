@@ -11,6 +11,7 @@
         <td>{{ person.name }}</td>
         {% block buttons %}
         <td><a href="{% url 'person-edit' person.id %}"><button class="btn btn-outline-info">Edit</button></a></td>
+        <td><a href="{% url 'person-delete' person.id %}"><button class="btn btn-outline-danger">Delete</button></a></td>
         {% endblock buttons %}
     </tr>
     {% endfor %}

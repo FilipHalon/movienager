@@ -51,3 +51,9 @@ class PersonEditView(generic.UpdateView):
     fields = "__all__"
     success_url = "/people"
     template_name = "person/forms/person-edit.html"
+
+
+class PersonDeleteView(generic.DeleteView):
+    model = Person
+    success_url = "/people"
+    template_name = "person/forms/person-delete.html"

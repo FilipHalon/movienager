@@ -1,5 +1,15 @@
 {% extends 'index.html' %}
 
+{% load ratings %}
+
+{% block styling_and_scripts %}
+<style>
+    .star-ratings-rating-average, .star-ratings-rating-count, .star-ratings-rating-user {
+        display: none;
+    }
+</style>
+{% endblock styling_and_scripts %}
+
 {% block title %}
     Movies
 {% endblock title %}
@@ -22,6 +32,7 @@
                 {% endfor %}
                 </td>
                 {% block buttons %}
+                <td>{% ratings movie icon_height=20 icon_width=20 %}</td>
                 <td><a href="{% url 'movie-edit' movie.id %}"><button class="btn btn-outline-info">Edit</button></a></td>
                 <td><a href="{% url 'movie-delete' movie.id %}"><button class="btn btn-outline-danger">Delete</button></a></td>
                 {% endblock buttons %}

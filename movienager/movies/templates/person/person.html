@@ -1,5 +1,7 @@
 {% extends 'index.html' %}
 
+{% load ratings %}
+
 {% block title %}
     Personal details
 {% endblock title %}
@@ -8,6 +10,7 @@
     <ul>
         <li><img src={{ person.photo }} alt={{ object.name }}></li>
         <li>Name: {{ object.name }}</li>
+        <li>{% ratings person %}</li>
         <li>Actor in:
         {% for movie in object.actors.all %}
             {{ movie.title }}{% if not forloop.last %}, {% endif %}

@@ -1,5 +1,7 @@
 {% extends 'movie/movies.html' %}
 
+{% load ratings %}
+
 {% block title %}
     People
 {% endblock title %}
@@ -7,9 +9,10 @@
 {% block table_content %}
     {% for person in people %}
     <tr>
-        <td><img src="{{ person.poster }}" alt="{{ person.name }}"></td>
+        <td><img src="{{ person.photo }}" alt="{{ person.name }}"></td>
         <td><a href={% url 'person' person.id %}>{{ person.name }}</a></td>
         {% block buttons %}
+        <td>{% ratings person icon_height=20 icon_width=20 %}</td>
         <td><a href="{% url 'person-edit' person.id %}"><button class="btn btn-outline-info">Edit</button></a></td>
         <td><a href="{% url 'person-delete' person.id %}"><button class="btn btn-outline-danger">Delete</button></a></td>
         {% endblock buttons %}

@@ -6,7 +6,7 @@
     Personal details
 {% endblock title %}
 
-{% block body %}
+{% block main %}
     <ul>
         <li><img src={{ object.photo.url }} alt={{ object.name }}></li>
         <li>Name: {{ object.name }}</li>
@@ -22,4 +22,4 @@
         {% endfor %}
         </li>
     </ul>
-{% endblock body %}
+{% endblock main %}

@@ -5,7 +5,7 @@
   <link href="../static/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
   {% endblock additional_styling %}
 
-{% block body %}
+{% block main %}
 
 <body id="page-top">
 
@@ -201,7 +201,12 @@
 
   <!-- Page level custom scripts -->
   <script src="../static/js/demo/datatables-demo.js"></script>
+  {% comment %} <script>
+    $('#dataTable').DataTable( {
+    paging: false,
+    } );
+  </script> {% endcomment %}
 
 </body>
 
-{% endblock body %}
+{% endblock main %}

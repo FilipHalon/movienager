@@ -6,7 +6,7 @@
     Edit the user
 {% endblock title %}
 
-{% block body %}
+{% block main %}
     <section class="container">
         <form action="" method="POST" class="mt-4" enctype="multipart/form-data">
             {% csrf_token %}
@@ -14,4 +14,4 @@
             <button type="submit" class="mb-4 btn btn-outline-info">Submit</button>
         </form>
     </section>
-{% endblock body %}
+{% endblock main %}

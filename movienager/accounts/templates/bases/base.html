@@ -20,9 +20,9 @@
 <body>
     {% block header %}
     {% endblock header %}
-    <main class="container-fluid p-0">
-        {% block body %}
-        {% endblock body %}
-    </main>
+    {% comment %} <main class="container-fluid p-0"> {% endcomment %}
+    {% block main %}
+    {% endblock main %}
+    {% comment %} </main> {% endcomment %}
 </body>
 </html>

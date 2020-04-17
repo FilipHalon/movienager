@@ -4,7 +4,7 @@
     Delete the user
 {% endblock title %}
 
-{% block body %}
+{% block main %}
     <section class="container d-flex justify-content-center">
         <form rm method="post">
             {% csrf_token %}
@@ -17,4 +17,4 @@
             </div>
         </form>
     </section>
-{% endblock body %}
+{% endblock main %}

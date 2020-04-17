@@ -13,26 +13,43 @@
 {% endblock title %}
 
 {% block main %}
-    <table>
-        {% include 'partials/thead.html' with obj=object_list.0 %}
-        <tbody>
-        {% block table_content %}
-            {% for movie in movies %}
-            <tr>
-                <td><img src="{{ movie.poster.url }}" alt="{{ movie.title }}"></td>
-                <td>{{ movie.title }}</td>
-                <td>{{ movie.prod_year }}</td>
-                <td>{{ movie.short_desc }}</td>
-                <td>{{ movie.directed_by }}</td>
-                <td>
-                {% for person in movie.starring.all %}
-                    {{ person.name }}{% if not forloop.last %}, {% endif %}
+    <div class="table-responsive">
+        <table class="table" id="dataTable">
+            {% include 'partials/thead.html' with obj=object_list.0 %}
+            <tbody>
+            {% block table_content %}
+                {% for movie in movies %}
+                <tr>
+                    <td><img src="{{ movie.poster.url }}" alt="{{ movie.title }}" class="img-thumbnail"></td>
+                    <td>{{ movie.title }}</td>
+                    <td>{{ movie.prod_year }}</td>
+                    <td>{{ movie.short_desc }}</td>
+                    <td>{{ movie.directed_by }}</td>
+                    <td>
+                    {% for person in movie.starring.all %}
+                        {{ person.name }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                    </td>
+                    {% include 'partials/buttons.html' with obj=movie edit_page="movie-edit" delete_page="movie-delete" %}
+                </tr>
                 {% endfor %}
-                </td>
-                {% include 'partials/buttons.html' with obj=movie edit_page="movie-edit" delete_page="movie-delete" %}
-            </tr>
-            {% endfor %}
-        {% endblock table_content %}
-        </tbody>
-    </table>
+            {% endblock table_content %}
+            </tbody>
+        </table>
+    </div>
+    {% block scripts %}
+    {% include 'partials/auth-scripts.html' %}
+
+    <!-- Page level plugins -->
+    <script src="../static/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../static/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="../static/js/demo/datatables-demo.js"></script>
+    <script>
+        $('#dataTable').DataTable( {
+        paging: false,
+        } );
+    </script>
+    {% endblock scripts %}
 {% endblock main %}

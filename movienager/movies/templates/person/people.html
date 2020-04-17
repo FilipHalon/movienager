@@ -9,7 +9,7 @@
 {% block table_content %}
     {% for person in people %}
     <tr>
-        <td><img src="{{ person.photo.url }}" alt="{{ person.name }}"></td>
+        <td><img src="{{ person.photo.url }}" alt="{{ person.name }}" class="img-thumbnail"></td>
         <td><a href={% url 'person' person.id %}>{{ person.name }}</a></td>
         {% include 'partials/buttons.html' with obj=person edit_page="person-edit" delete_page="person-delete" %}
     </tr>

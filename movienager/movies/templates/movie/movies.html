@@ -19,7 +19,7 @@
         {% block table_content %}
             {% for movie in movies %}
             <tr>
-                <td><img src="{{ movie.poster }}" alt="{{ movie.title }}"></td>
+                <td><img src="{{ movie.poster.url }}" alt="{{ movie.title }}"></td>
                 <td>{{ movie.title }}</td>
                 <td>{{ movie.prod_year }}</td>
                 <td>{{ movie.short_desc }}</td>

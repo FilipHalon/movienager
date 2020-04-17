@@ -2,11 +2,11 @@ from django.db import models
 
 
 def person_photo_directory_path(instance, filename):
-    return f"people/{instance.id}/photos/{filename}"
+    return f"people/{instance.name}/photos/{filename}"
 
 
 def poster_directory_path(instance, filename):
-    return f"movies/{instance.id}/posters/{filename}"
+    return f"movies/{instance.title}/posters/{filename}"
 
 
 # Create your models here.

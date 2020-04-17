@@ -8,7 +8,7 @@
 
 {% block body %}
     <ul>
-        <li><img src={{ person.photo }} alt={{ object.name }}></li>
+        <li><img src={{ object.photo.url }} alt={{ object.name }}></li>
         <li>Name: {{ object.name }}</li>
         <li>{% ratings person %}</li>
         <li>Actor in:

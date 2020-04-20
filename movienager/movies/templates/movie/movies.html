@@ -26,7 +26,7 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th class="main-column">Movie</th>
+                    <th class="main-col">Movie</th>
                     <th>Year</th>
                     <th>Director</th>
                     <th>Starring</th>
@@ -36,7 +36,7 @@
                 {% for movie in movies %}
                 <tr>
                     <td align="center"><img class="photo" src="{{ movie.poster.url }}" alt="{{ movie.title }}"></td>
-                    <td class="main-column">
+                    <td class="main-col">
                         {% include 'partials/about.html' with obj=movie edit_page="movie-edit" delete_page="movie-delete" %}
                     <td>{{ movie.prod_year }}</td>
                     <td>{{ movie.directed_by }}</td>

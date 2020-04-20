@@ -24,6 +24,7 @@
     <div class="table-container table-responsive p-3">
         <table class="table table-borderless" id="dataTable">
             {% comment %} {% include 'partials/thead.html' with obj=object_list.0 %} {% endcomment %}
+            {% block table_content %}
             <thead>
                 <tr>
                     <th></th>
@@ -35,7 +36,6 @@
                 </tr>
             </thead>
             <tbody>
-            {% block table_content %}
                 {% for movie in movies %}
                 <tr>
                     <td align="center"><img class="photo" src="{{ movie.poster.url }}" alt="{{ movie.title }}"></td>

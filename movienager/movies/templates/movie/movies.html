@@ -27,7 +27,7 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th>Movie</th>
+                    <th class="main-column">Movie</th>
                     <th>Year</th>
                     <th>Director</th>
                     <th>Starring</th>
@@ -38,8 +38,8 @@
             {% block table_content %}
                 {% for movie in movies %}
                 <tr>
-                    <td><img class="photo" src="{{ movie.poster.url }}" alt="{{ movie.title }}"></td>
-                    <td>
+                    <td align="center"><img class="photo" src="{{ movie.poster.url }}" alt="{{ movie.title }}"></td>
+                    <td class="main-column">
                         <h3>{{ movie.title }}</h3>
                         {% ratings movie icon_height=20 icon_width=20 %}
                         <p>{{ movie.short_desc|truncatechars:230 }}</p>

@@ -1,7 +1,5 @@
 {% extends 'movie/movies.html' %}
 
-{% load ratings %}
-
 {% block title %}
     People
 {% endblock title %}
@@ -17,15 +15,7 @@
         {% for person in people %}
         <tr>
             <td><img class="photo" src="{{ person.photo.url }}" alt="{{ person.name }}" class="img-thumbnail"></td>
-            <td>
-                <h3><a href={% url 'person' person.id %}>{{ person.name }}</a></h3>
-                {% ratings person icon_height=20 icon_width=20 %}
-                <div class="btn-group d-block" role="group" aria-label="Actions">
-                    <a href="{% url 'person-edit' person.id %}"><button class="btn btn-outline-info m-1">Edit</button></a>
-                    <a href="{% url 'person-delete' person.id %}"><button class="btn btn-outline-danger m-1">Delete</button></a>
-                </div>
-            </td>
-            {% comment %} {% include 'partials/buttons.html' with obj=person edit_page="person-edit" delete_page="person-delete" %} {% endcomment %}
+            <td>{% include 'partials/about.html' with obj=person edit_page="person-edit" delete_page="person-delete" %}</td>
         </tr>
         {% endfor %}
     </tbody>

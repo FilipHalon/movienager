@@ -19,11 +19,9 @@
 {% endblock title %}
 
 {% block main %}
-    {% comment %} <img class="background" src="../static/assets/cinema-4609877_1920-min.jpg" alt=""> {% endcomment %}
     <main class="container-fluid">
     <div class="table-container table-responsive p-3">
         <table class="table table-borderless" id="dataTable">
-            {% comment %} {% include 'partials/thead.html' with obj=object_list.0 %} {% endcomment %}
             {% block table_content %}
             <thead>
                 <tr>
@@ -32,7 +30,6 @@
                     <th>Year</th>
                     <th>Director</th>
                     <th>Starring</th>
-                    {% comment %} <th>Rating</th> {% endcomment %}
                 </tr>
             </thead>
             <tbody>
@@ -40,20 +37,14 @@
                 <tr>
                     <td align="center"><img class="photo" src="{{ movie.poster.url }}" alt="{{ movie.title }}"></td>
                     <td class="main-column">
-                        <h3>{{ movie.title }}</h3>
-                        {% ratings movie icon_height=20 icon_width=20 %}
-                        <p>{{ movie.short_desc|truncatechars:230 }}</p>
-                        <a href="{% url 'movie-edit' movie.id %}"><button class="btn btn-outline-info m-1">Edit</button></a>
-                        <a href="{% url 'movie-delete' movie.id %}"><button class="btn btn-outline-danger m-1">Delete</button></a>
+                        {% include 'partials/about.html' with obj=movie edit_page="movie-edit" delete_page="movie-delete" %}
                     <td>{{ movie.prod_year }}</td>
-                    {% comment %} <td>{{ movie.short_desc|truncatechars:100 }}</td> {% endcomment %}
                     <td>{{ movie.directed_by }}</td>
                     <td>
                     {% for person in movie.starring.all %}
                         {{ person.name }}{% if not forloop.last %}, {% endif %}
                     {% endfor %}
                     </td>
-                    {% comment %} {% include 'partials/buttons.html' with obj=movie edit_page="movie-edit" delete_page="movie-delete" %} {% endcomment %}
                 </tr>
                 {% endfor %}
             {% endblock table_content %}

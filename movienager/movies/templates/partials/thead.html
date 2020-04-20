@@ -1,7 +1,7 @@
 {% load get_field_names %}
 
 <thead>
-    <tr>
+    <tr class="table-header">
     {% for name in obj|get_field_names %}
         <th>{{ name }}</th>
     {% endfor %}

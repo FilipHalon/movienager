@@ -1,5 +1,7 @@
 {% extends 'index.html' %}
 
+{% load ratings %}
+
 {% block styling_and_scripts %}
 <link rel="stylesheet" href="../static/style/table.css">
 <link rel="stylesheet" href="../static/style/style.css">
@@ -21,22 +23,37 @@
     <main class="container-fluid">
     <div class="table-responsive p-3">
         <table class="table table-borderless" id="dataTable">
-            {% include 'partials/thead.html' with obj=object_list.0 %}
+            {% comment %} {% include 'partials/thead.html' with obj=object_list.0 %} {% endcomment %}
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Movie</th>
+                    <th>Year</th>
+                    <th>Director</th>
+                    <th>Starring</th>
+                    {% comment %} <th>Rating</th> {% endcomment %}
+                </tr>
+            </thead>
             <tbody>
             {% block table_content %}
                 {% for movie in movies %}
                 <tr>
                     <td><img class="photo" src="{{ movie.poster.url }}" alt="{{ movie.title }}"></td>
-                    <td>{{ movie.title }}</td>
+                    <td>
+                        <h3>{{ movie.title }}</h3>
+                        {% ratings movie icon_height=20 icon_width=20 %}
+                        <p>{{ movie.short_desc|truncatechars:230 }}</p>
+                        <a href="{% url 'movie-edit' movie.id %}"><button class="btn btn-outline-info m-1">Edit</button></a>
+                        <a href="{% url 'movie-delete' movie.id %}"><button class="btn btn-outline-danger m-1">Delete</button></a>
                     <td>{{ movie.prod_year }}</td>
-                    <td>{{ movie.short_desc|truncatechars:100 }}</td>
+                    {% comment %} <td>{{ movie.short_desc|truncatechars:100 }}</td> {% endcomment %}
                     <td>{{ movie.directed_by }}</td>
                     <td>
                     {% for person in movie.starring.all %}
                         {{ person.name }}{% if not forloop.last %}, {% endif %}
                     {% endfor %}
                     </td>
-                    {% include 'partials/buttons.html' with obj=movie edit_page="movie-edit" delete_page="movie-delete" %}
+                    {% comment %} {% include 'partials/buttons.html' with obj=movie edit_page="movie-edit" delete_page="movie-delete" %} {% endcomment %}
                 </tr>
                 {% endfor %}
             {% endblock table_content %}

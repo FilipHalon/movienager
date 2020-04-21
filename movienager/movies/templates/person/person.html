@@ -16,7 +16,7 @@
                 <li><h3>{{ object.name }}</h3></li>
                 <li>{% ratings person %}</li>
                 <li>Actor in:
-                {% for movie in object.actors.all %}
+                {% for movie in object.actor.all %}
                     {{ movie.title }}{% if not forloop.last %}, {% endif %}
                 {% endfor %}
                 </li>

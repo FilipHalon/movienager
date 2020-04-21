@@ -18,9 +18,6 @@ class UserEditForm(forms.ModelForm):
         exclude = ("photo", "last_login", "date_joined", "user_permissions", "groups")
         widgets = {"email": forms.EmailInput(attrs={"readonly": "readonly"})}
 
-    def clean(self):
-        return self.cleaned_data
-
 
 class UserExtendedEditForm(forms.ModelForm):
     class Meta(UserEditForm.Meta):

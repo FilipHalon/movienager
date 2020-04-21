@@ -66,7 +66,7 @@ class UserManagementView(ManageUserRequired, generic.ListView):
     def render_if_form_error(self, request, error_message):
         context = {"users": User.objects.all(), "error": error_message}
         context.update(self.extra_context)
-        return render(request, "user-management.html", context)
+        return render(request, "user_management/user-management.html", context)
 
     def post(self, request, *args, **kwargs):
         user = User.objects.filter(email=request.POST.get("email"))

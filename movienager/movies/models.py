@@ -23,7 +23,7 @@ class Movie(models.Model):
     title = models.CharField(max_length=128, verbose_name="Title")
     prod_year = models.IntegerField(verbose_name="Production year")
     short_desc = models.CharField(max_length=512, verbose_name="Short description")
-    starring = models.ManyToManyField(Person, related_name="actors", verbose_name="Starring")
+    starring = models.ManyToManyField(Person, through="Cast", related_name="actor", verbose_name="Starring")
     directed_by = models.ForeignKey(
         Person,
         blank=True,
@@ -35,3 +35,9 @@ class Movie(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Cast(models.Model):
+    movie = models.ForeignKey(Movie, blank=True, null=True, on_delete=models.SET_NULL, verbose_name="Movie")
+    actor = models.ForeignKey(Person, blank=True, null=True, on_delete=models.SET_NULL, verbose_name="Actor")
+    role = models.CharField(max_length=128)

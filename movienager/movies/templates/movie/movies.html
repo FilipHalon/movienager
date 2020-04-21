@@ -19,7 +19,7 @@
 {% endblock title %}
 
 {% block main %}
-    <main class="container-fluid">
+    <main class="container-xl">
     <div class="table-container table-responsive p-3">
         <table class="table table-borderless" id="dataTable">
             {% block table_content %}
@@ -61,10 +61,10 @@
 
     <!-- Page level custom scripts -->
     <script src="../static/js/demo/datatables-demo.js"></script>
-    <script>
+    {% comment %} <script>
         $('#dataTable').DataTable( {
         paging: false,
-        } );
-    </script>
+        } );~
+    </script> {% endcomment %}
     {% endblock scripts %}
 {% endblock main %}

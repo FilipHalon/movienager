@@ -1,8 +1,6 @@
 from django.core.management.base import BaseCommand
 
-from ._user_factory import UserFactory
-
-# from ._user_factory import create_user
+from accounts.factory.user_factory import UserFactory
 
 
 class Command(BaseCommand):
@@ -18,5 +16,4 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         for _ in range(options["num"]):
-            # create_user()
             UserFactory.create()

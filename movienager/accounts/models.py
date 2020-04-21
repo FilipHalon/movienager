@@ -2,7 +2,6 @@ from django.contrib.auth.models import AbstractUser, Permission
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
-from django.utils.translation import gettext_lazy as _
 
 from .managers import AdjustedUserManager
 
@@ -14,18 +13,18 @@ class User(AbstractUser):
     TYPES = ((REGULAR_USER, "Regular user"), (ADMIN, "Admin"))
 
     username = models.CharField(
-        _("username"),
+        ("username"),
         max_length=30,
         unique=True,
         blank=True,
         null=True,
-        help_text=_("30 characters or fewer. Letters, digits and @/./+/-/_ only."),
+        help_text=("30 characters or fewer. Letters, digits and @/./+/-/_ only."),
         validators=[UnicodeUsernameValidator()],
-        error_messages={"unique": _("A user with that username already exists."),},
+        error_messages={"unique": ("A user with that username already exists."),},
     )
-    first_name = models.CharField(_("first name"), max_length=20, blank=True)
-    last_name = models.CharField(_("last name"), max_length=30, blank=True)
-    email = models.EmailField(_("email address"), primary_key=True)
+    first_name = models.CharField(("first name"), max_length=20, blank=True)
+    last_name = models.CharField(("last name"), max_length=30, blank=True)
+    email = models.EmailField(("email address"), primary_key=True)
     photo = models.ImageField(blank=True, upload_to="profile_photos")
     user_type = models.PositiveSmallIntegerField(choices=TYPES, default=REGULAR_USER)
 

@@ -12,7 +12,12 @@ def poster_directory_path(instance, filename):
 # Create your models here.
 class Person(models.Model):
     photo = models.ImageField(blank=True, upload_to=person_photo_directory_path, verbose_name="Photo")
-    name = models.CharField(max_length=128, verbose_name="Name")
+    first_name = models.CharField(max_length=128, verbose_name="First name")
+    last_name = models.CharField(max_length=128, verbose_name="Last name")
+
+    @property
+    def name(self):
+        return f"{self.first_name} {self.last_name}"
 
     def __str__(self):
         return self.name

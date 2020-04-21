@@ -1,6 +1,11 @@
-{% extends 'bases/auth-base.html' %}
+{% extends 'bases/base.html' %}
 
 {% load widget_tweaks %}
+
+{% block styling_and_scripts %}
+  <!-- Custom styles for this template -->
+  <link href="../static/css/sb-admin-2.min.css" rel="stylesheet">
+{% endblock styling_and_scripts %}
 
 {% block title %}
   Sign up
@@ -63,8 +68,6 @@
   </div>
 
 </div>
-
-{% include 'partials/auth-scripts.html' %}
 
 </body>
 {% endblock main %}

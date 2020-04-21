@@ -1,8 +1,14 @@
 {% extends 'bases/base.html' %}
 
+{% load static %}
+
 {% block styling_and_scripts %}
+    <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+    <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
     <link rel="stylesheet" href="../static/style/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+    {% block additional_styling %}
+    {% endblock additional_styling %}
 {% endblock styling_and_scripts %}
 
 {% block title %}

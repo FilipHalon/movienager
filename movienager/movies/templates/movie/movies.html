@@ -2,19 +2,14 @@
 
 {% load static %}
 
-{% block styling_and_scripts %}
-<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
-<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+{% block additional_styling %}
 <link rel="stylesheet" href="../static/style/table.css">
-<link rel="stylesheet" href="../static/style/style.css">
-<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet"> 
 <style>
     .star-ratings-rating-average, .star-ratings-rating-count, .star-ratings-rating-user {
         display: none;
     }
 </style>
-{% endblock styling_and_scripts %}
+{% endblock additional_styling %}
 
 {% block title %}
     Movies
@@ -56,17 +51,6 @@
     </main>
     {% block scripts %}
     {% include 'partials/auth-scripts.html' %}
-
-    <!-- Page level plugins -->
-    <script src="../../../static/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="../../../static/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="../../../static/js/demo/datatables-demo.js"></script>
-    {% comment %} <script>
-        $('#dataTable').DataTable( {
-        paging: false,
-        } );~
-    </script> {% endcomment %}
+    {% include 'partials/datatables-scripts.html' %}
     {% endblock scripts %}
 {% endblock main %}

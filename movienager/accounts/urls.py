@@ -1,4 +1,4 @@
-from django.urls import path, re_path
+from django.urls import path
 
 import accounts.views as views
 
@@ -14,13 +14,13 @@ urlpatterns = [
         views.AdminPanelUserMngView.as_view(),
         name="admin-panel-user-mng",
     ),
-    re_path(
-        r"^user_edit/(?P<pk>[\w\-@\._]+$)",
+    path(
+        "^user_edit/<pk>",
         views.UserEditView.as_view(),
         name="user-edit",
     ),
-    re_path(
-        r"^user_delete/(?P<pk>[\w\-@\._]+$)",
+    path(
+        "user_delete/<pk>",
         views.UserDeleteView.as_view(),
         name="user-delete",
     ),

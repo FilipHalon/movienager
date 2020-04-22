@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
+from django.core.exceptions import MultipleObjectsReturned
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views import generic
@@ -69,29 +70,13 @@ class UserManagementView(AddUserRequired, generic.ListView):
         return render(request, "user_management/user-management.html", context)
 
     def post(self, request, *args, **kwargs):
-        user = User.objects.filter(email=request.POST.get("email"))
-        if len(user) == 1:
-            if "delete" in request.POST:
-                user.delete()
-            username = request.POST.get("username")
-            if (
-                user.filter(username=username)
-                or len(User.objects.filter(username=username)) == 0
-            ):
-                edited_user = user[0]
-                form = forms.UserEditForm(request.POST, instance=edited_user)
-                if form.is_valid():
-                    password = form.cleaned_data.pop("password")
-                    if password:
-                        edited_user.set_password(password)
-                        edited_user.save()
-                    user.update(**form.cleaned_data)
-                    edited_user.set_permission()
-                    return redirect("user-management")
-                return self.render_if_form_error(
-                    request, "The provided data was not correct."
-                )
-            return self.render_if_form_error(
-                request, "A user with this username already exists."
-            )
-        return self.render_if_form_error(request, "Changing an e-mail is not allowed.")
+        try:
+            user = User.objects.get(email=request.POST.get("email"))
+        except MultipleObjectsReturned:
+            return self.render_if_form_error(request, "You cannot change the e-mail.")
+
+        form = forms.UserEditForm(request.POST, instance=user)
+        if form.is_valid():
+            user = form.save()
+            user.set_permission()
+        return redirect("user-management")

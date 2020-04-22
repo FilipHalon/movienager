@@ -15,7 +15,7 @@ urlpatterns = [
         name="admin-panel-user-mng",
     ),
     path(
-        "^user_edit/<pk>",
+        "user_edit/<pk>",
         views.UserEditView.as_view(),
         name="user-edit",
     ),

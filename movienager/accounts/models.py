@@ -32,26 +32,27 @@ class User(AbstractUser):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
-    class Meta:
-        permissions = (("manage user", "Can list, add, edit and delete users"),)
-
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         self.set_permission()
 
     def set_permission(self):
         if self.user_type == self.ADMIN:
-            self.change_permission(self)
+            self.add_permission(self)
         else:
-            self.change_permission(self, method="revoke")
+            self.remove_permission(self)
 
     @classmethod
-    def change_permission(cls, user, perm_codename="manage user", method="grant"):
+    def get_permission(cls, user, perm_codename):
         content_type = ContentType.objects.get_for_model(cls)
-        permission = Permission.objects.get(
+        return Permission.objects.get(
             codename=perm_codename, content_type=content_type
         )
-        if method == "grant":
-            user.user_permissions.add(permission)
-        elif method == "revoke":
-            user.user_permissions.remove(permission)
+
+    def add_permission(self, user):
+        permission = self.get_permission(self, "add_user")
+        user.user_permissions.add(permission)
+
+    def remove_permission(self, user):
+        permission = self.get_permission(self, "add_user")
+        user.user_permissions.remove(permission)

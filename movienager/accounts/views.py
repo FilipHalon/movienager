@@ -33,31 +33,31 @@ class UserLogoutView(LogoutView):
     next_page = "/"
 
 
-class ManageUserRequired(PermissionRequiredMixin):
+class AddUserRequired(PermissionRequiredMixin):
     login_url = "signin"
-    permission_required = "accounts.manage_user"
+    permission_required = "accounts.add_user"
 
 
-class AdminPanelUserMngView(ManageUserRequired, generic.ListView):
+class AdminPanelUserMngView(AddUserRequired, generic.ListView):
     model = User
     context_object_name = "users"
     template_name = "user_management/admin-panel-user-mng.html"
 
 
-class UserEditView(ManageUserRequired, generic.UpdateView):
+class UserEditView(AddUserRequired, generic.UpdateView):
     model = User
     template_name = "user_forms/user-edit.html"
     success_url = "/admin_panel/user_management"
     form_class = forms.UserExtendedEditForm
 
 
-class UserDeleteView(ManageUserRequired, generic.DeleteView):
+class UserDeleteView(AddUserRequired, generic.DeleteView):
     model = User
     template_name = "user_forms/user-delete.html"
     success_url = "/admin_panel/user_management"
 
 
-class UserManagementView(ManageUserRequired, generic.ListView):
+class UserManagementView(AddUserRequired, generic.ListView):
     model = User
     context_object_name = "users"
     template_name = "user_management/user-management.html"

@@ -35,11 +35,32 @@
                     <td> {{ user.last_login }} </td>
                     <td> {% render_field form.password placeholder="Enter a new password." %} </td>
                     <td><button type="submit" name="edit">Save</button></td>
-                    <td><button type="submit" name="delete">Delete</button></td>
+                    <td><button type="submit" name="delete" disabled>Delete</button></td>
                 </tr>
                 </form>
             {% endfor %}
         </tbody>
     </table>
-
+    <script type="text/javascript"> window.CSRF_TOKEN = '{{ csrf_token }}';</script>
+    <script>
+        const tbody = document.querySelector("tbody");
+        tbody.addEventListener("click", e => {
+            const target = e.target;
+            if (target.name == "edit" || target.name == "delete") {
+                e.preventDefault();
+                if (target.name == "delete") {
+                }
+                else {
+                    const tr = target.closest("tr");
+                    const form = tr.previousElementSibling.previousElementSibling;
+                    const formData = new FormData(form);
+                    fetch('/user_management', {
+                        method: "POST",
+                        body: formData,
+                        headers: {'X-CSRFToken': window.CSRF_TOKEN}
+                    }).then(res => console.log(res))
+                }
+            }
+        });
+    </script>
 {% endblock body %}

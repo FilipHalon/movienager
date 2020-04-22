@@ -1,7 +1,10 @@
+import json
+
 from django.conf import settings
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.core.exceptions import MultipleObjectsReturned
+from django.http import HttpResponse, QueryDict
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views import generic
@@ -64,19 +67,14 @@ class UserManagementView(AddUserRequired, generic.ListView):
     template_name = "user_management/user-management.html"
     extra_context = {"form": forms.UserEditForm, "choices": User.TYPES}
 
-    def render_if_form_error(self, request, error_message):
-        context = {"users": User.objects.all(), "error": error_message}
-        context.update(self.extra_context)
-        return render(request, "user_management/user-management.html", context)
-
     def post(self, request, *args, **kwargs):
         try:
             user = User.objects.get(email=request.POST.get("email"))
         except MultipleObjectsReturned:
-            return self.render_if_form_error(request, "You cannot change the e-mail.")
+            return HttpResponse("You cannot change the e-mail.")
 
         form = forms.UserEditForm(request.POST, instance=user)
         if form.is_valid():
             user = form.save()
             user.set_permission()
-        return redirect("user-management")
+        return HttpResponse("Edited")

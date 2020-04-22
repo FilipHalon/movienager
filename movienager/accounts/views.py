@@ -78,16 +78,16 @@ class UserManagementView(AddUserRequired, generic.ListView):
                 user.filter(username=username)
                 or len(User.objects.filter(username=username)) == 0
             ):
-                form = forms.UserEditForm(request.POST)
+                edited_user = user[0]
+                form = forms.UserEditForm(request.POST, instance=edited_user)
                 print(form)
                 if form.is_valid():
-                    print(form.cleaned_data)
                     password = form.cleaned_data.pop("password")
                     if password:
-                        user[0].set_password(password)
-                        user[0].save()
+                        edited_user.set_password(password)
+                        edited_user.save()
                     user.update(**form.cleaned_data)
-                    user[0].set_permission()
+                    edited_user.set_permission()
                     return redirect("user-management")
                 return self.render_if_form_error(
                     request, "The provided data was not correct."

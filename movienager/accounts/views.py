@@ -80,7 +80,6 @@ class UserManagementView(AddUserRequired, generic.ListView):
             ):
                 edited_user = user[0]
                 form = forms.UserEditForm(request.POST, instance=edited_user)
-                print(form)
                 if form.is_valid():
                     password = form.cleaned_data.pop("password")
                     if password:

@@ -36,6 +36,8 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "widget_tweaks",
+    "crispy_forms",
 ]
 
 PROJECT_APPS = ["accounts"]
@@ -120,7 +122,11 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 MEDIA_URL = "/media/"
 
@@ -129,3 +135,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 # User settings
 
 AUTH_USER_MODEL = "accounts.User"
+
+LOGIN_REDIRECT_URL = "/"
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"

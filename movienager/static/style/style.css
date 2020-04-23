@@ -1,0 +1,86 @@
+:root {
+    --main-text-color: #4cbda8;
+    --background-opaque: hsla(0, 0%, 20%, .9);
+    --table-border: solid 1px #4cbda8;
+}
+
+a {
+    color: #ff4500
+}
+
+body {
+    background-image: url("../../static/assets/interlaced.png");
+}
+
+header {
+    background: #333;
+}
+
+nav li {
+    margin: auto .5em;
+}
+
+main {
+    margin: 2vw;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 1px;
+    color: var(--main-text-color);
+}
+
+.table-container {
+    border-radius: 8px;
+    border: solid transparent 2vw;
+    background: var(--background-opaque);
+}
+
+.table {
+    color: var(--main-text-color);
+}
+
+.table th, td {
+    padding: 1em !important;
+}
+
+.table tr {
+    transition: .4s;
+}
+
+.table tr:hover {
+    background: #444;
+}
+
+.table td:first-of-type {
+    border-left: var(--table-border);
+}
+
+.table td:last-of-type {
+    border-right: var(--table-border);
+}
+
+.photo {
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.main-col {
+    max-width: 500px;
+}
+
+.photo-col {
+    max-width: 250px;
+}
+
+.personal-details {
+    background: var(--background-opaque);
+    border-radius: 4px;
+}
+
+.list-div {
+    background: #333;
+}
+
+.list-div > li {
+    display: block;
+    padding: .5em;
+}

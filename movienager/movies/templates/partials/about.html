@@ -1,0 +1,17 @@
+{% load ratings %}
+
+<h3>
+{% if obj.title %}
+    {{ movie.title }}
+{% else %}
+    <a href={% url 'person' person.id %}>{{ person.name }}</a>
+{% endif %}
+</h3>
+{% ratings obj icon_height=20 icon_width=20 %}
+{% if obj.short_desc %}
+<p>{{ movie.short_desc|truncatechars:230 }}</p>
+{% endif %}
+<div class="btn-group d-block" role="group" aria-label="Actions">
+    <a href="{% url edit_page obj.id %}"><button class="btn btn-outline-info m-1">Edit</button></a>
+    <a href="{% url delete_page obj.id %}"><button class="btn btn-outline-danger m-1">Delete</button></a>
+</div>

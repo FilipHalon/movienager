@@ -36,14 +36,9 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-<<<<<<< HEAD
-    "widget_tweaks",
-    "crispy_forms",
-=======
     'widget_tweaks',
     'crispy_forms',
     'star_ratings'
->>>>>>> feature/movies_views
 ]
 
 PROJECT_APPS = [

@@ -1,12 +1,19 @@
-FROM python:3.7
+FROM alpine:3.11
+LABEL maintainer="halon.filip@gmail.com"
 
-RUN mkdir /movienager_image
-WORKDIR /movienager_image
+FROM python:3.7-alpine
+RUN apk --update add gcc build-base freetype-dev libpng-dev openblas-dev postgresql-dev python3-dev musl-dev zlib-dev jpeg-dev
 
-ADD . /movienager_image/
-
+ENV LIBRARY_PATH=/lib:/usr/lib
 ENV PYTHONUNBUFFERED 1
-ENV LANG C.UTF-8
 
-COPY requirements.txt /code/
-RUN pip install -r requirements.txt
+RUN mkdir /movienager
+WORKDIR /movienager
+
+ADD ./Pipfile /movienager/Pipfile
+RUN pip install pipenv && pipenv install --skip-lock --system --dev
+
+ADD . /movienager/
+
+RUN adduser -D user
+USER user

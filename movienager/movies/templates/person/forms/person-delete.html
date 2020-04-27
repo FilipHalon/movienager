@@ -1,0 +1,8 @@
+{% extends 'user_forms/user-delete.html' %}
+
+{% block title %}
+    Delete the person
+{% endblock title %}
+
+{% block object_name %}person{% endblock object_name %}
+{% block redirect_to %}{% url 'people' %}{% endblock redirect_to %}

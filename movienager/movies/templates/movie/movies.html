@@ -1,0 +1,56 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block additional_styling %}
+<link rel="stylesheet" href="../static/style/table.css">
+<style>
+    .star-ratings-rating-average, .star-ratings-rating-count, .star-ratings-rating-user {
+        display: none;
+    }
+</style>
+{% endblock additional_styling %}
+
+{% block title %}
+    Movies
+{% endblock title %}
+
+{% block main %}
+    <main class="container-xl">
+    <div class="table-container table-responsive p-3">
+        <table class="table table-borderless" id="dataTable">
+            {% block table_content %}
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="main-col">Movie</th>
+                    <th>Year</th>
+                    <th>Director</th>
+                    <th>Starring</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for movie in movies %}
+                <tr>
+                    <td align="center"><img class="photo" src="{{ movie.poster.url }}" alt="{{ movie.title }}"></td>
+                    <td class="main-col">
+                        {% include 'partials/about.html' with obj=movie edit_page="movie-edit" delete_page="movie-delete" %}
+                    <td>{{ movie.prod_year }}</td>
+                    <td>{{ movie.directed_by }}</td>
+                    <td>
+                    {% for person in movie.starring.all %}
+                        {{ person.name }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                    </td>
+                </tr>
+                {% endfor %}
+            {% endblock table_content %}
+            </tbody>
+        </table>
+    </div>
+    </main>
+    {% block scripts %}
+    {% include 'partials/auth-scripts.html' %}
+    {% include 'partials/datatables-scripts.html' %}
+    {% endblock scripts %}
+{% endblock main %}

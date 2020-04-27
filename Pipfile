@@ -48,6 +48,7 @@ Pygments = "==2.6.1"
 django-star-ratings = "*"
 gunicorn = "*"
 whitenoise = "*"
+tox = "*"
 
 [requires]
 python_version = "3.7"

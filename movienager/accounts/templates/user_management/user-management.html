@@ -6,7 +6,7 @@
     User Management
 {% endblock title %}
 
-{% block body %}
+{% block main %}
     {% if error %}
         <p>{{ error }}</p>
     {% endif %}
@@ -41,6 +41,7 @@
             {% endfor %}
         </tbody>
     </table>
+    {% block scripts %}
     <script type="text/javascript"> window.CSRF_TOKEN = '{{ csrf_token }}';</script>
     <script>
         const tbody = document.querySelector("tbody");
@@ -63,4 +64,5 @@
             }
         });
     </script>
-{% endblock body %}
+    {% endblock scripts %}
+{% endblock main %}

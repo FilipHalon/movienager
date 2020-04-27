@@ -36,11 +36,15 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "widget_tweaks",
-    "crispy_forms",
+    'widget_tweaks',
+    'crispy_forms',
+    'star_ratings'
 ]
 
-PROJECT_APPS = ["accounts"]
+PROJECT_APPS = [
+    "accounts",
+    "movies"
+    ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
 
@@ -132,10 +136,23 @@ MEDIA_URL = "/media/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
+
 # User settings
 
 AUTH_USER_MODEL = "accounts.User"
 
+
+# Login url
+
 LOGIN_REDIRECT_URL = "/"
 
-CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+# Crispy Forms
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+# Django Star Rating
+
+STAR_RATINGS_RERATE_SAME_DELETE = False
+STAR_RATINGS_RANGE = 10

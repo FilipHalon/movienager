@@ -1,0 +1,12 @@
+{% load get_field_names %}
+
+<thead>
+    <tr class="table-header">
+    {% for name in obj|get_field_names %}
+        <th>{{ name }}</th>
+    {% endfor %}
+        <th>Rating</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+</thead>

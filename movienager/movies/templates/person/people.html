@@ -1,0 +1,22 @@
+{% extends 'movie/movies.html' %}
+
+{% block title %}
+    People
+{% endblock title %}
+
+{% block table_content %}
+    <thead>
+        <tr>
+            <th class="photo-col"></th>
+            <th>About</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for person in people %}
+        <tr>
+            <td class="photo-col" align="center"><img class="photo" src="{{ person.photo.url }}" alt="{{ person.name }}"></td>
+            <td>{% include 'partials/about.html' with obj=person edit_page="person-edit" delete_page="person-delete" %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+{% endblock table_content %}

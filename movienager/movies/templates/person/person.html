@@ -1,0 +1,31 @@
+{% extends 'index.html' %}
+
+{% load ratings %}
+
+{% block title %}
+    Personal details
+{% endblock title %}
+
+{% block main %}
+    <main class="container-xl">
+        <ul class="row p-4 list-group list-group-horizontal personal-details">
+            <div class="list-group-item list-div">
+                <li><img class="photo" src={{ object.photo.url }} alt={{ object.name }}></li>
+            </div>
+            <div class="col list-group-item list-div">
+                <li><h3>{{ object.name }}</h3></li>
+                <li>{% ratings person %}</li>
+                <li>Actor in:
+                {% for movie in object.actor.all %}
+                    {{ movie.title }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+                </li>
+                <li>Director in:
+                {% for movie in object.director.all %}
+                    {{ movie.title }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+                </li>
+            </div>
+        </ul>
+    </main>
+{% endblock main %}

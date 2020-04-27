@@ -1,2 +1,2 @@
-release: python ./bookshelfwise/manage.py migrate
-web: gunicorn --pythonpath bookshelfwise bookshelfwise.wsgi
+release: python ./movienager/manage.py migrate
+web: gunicorn --pythonpath movienager movienager.wsgi

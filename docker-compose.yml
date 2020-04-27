@@ -4,14 +4,14 @@ services:
   web:
     build: .
     command: >
-      sh -c "python movienager/manage.py collectstatic --noinput && 
-             python movienager/manage.py migrate &&
-             python movienager/manage.py runserver 0.0.0.0:8000"
+      sh -c "python manage.py collectstatic --noinput && 
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
     volumes:
-      - .:/movienager/
-    expose:
-      - 8000
-    env_file: .env
+      - ./movienager:/usr/src/movienager/
+    ports:
+      - 8000:8000
+    env_file: .env-dev
     depends_on:
       - db
   db:

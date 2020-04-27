@@ -1,0 +1,30 @@
+{% extends 'auth_forms/signup.html' %}
+
+{% load widget_tweaks %}
+
+{% block title %}
+  Sign in
+{% endblock title %}
+
+{% block form_title %}
+  Sign in
+{% endblock form_title %}
+
+{% block form_content %}
+  <div class="form-group">
+    {% render_field form.username class="form-control form-control-user" placeholder="E-mail" %}
+    <small class="form-text text-muted">{{ form.username.help_text }}</small>
+  </div>
+  <div class="form-group">
+    {% render_field form.password class="form-control form-control-user" placeholder="Password" %}
+    <small class="form-text text-muted">{{ form.password.help_text }}</small>
+  </div>
+{% endblock form_content %}
+
+{% block button_name %}
+  Sign in
+{% endblock button_name %}
+
+{% block chng_form_link %}
+  <a class="small" href={% url 'signup'%}>Create an account instead</a>
+{% endblock chng_form_link %}

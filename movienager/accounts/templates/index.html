@@ -1,0 +1,59 @@
+{% extends 'bases/base.html' %}
+
+{% load static %}
+
+{% block styling_and_scripts %}
+    <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+    <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+    <link rel="stylesheet" href="../static/style/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+    {% block additional_styling %}
+    {% endblock additional_styling %}
+{% endblock styling_and_scripts %}
+
+{% block title %}
+    Movienager
+{% endblock title %}
+
+{% block header %}
+<header class="sticky-top">
+    <nav>
+        <ul class="navbar navbar-nav d-flex flex-row justify-content-between">
+            <div class="d-flex flex-row">
+                <li>
+                    <a class="navbar-brand" href="{% url "index" %}">Movienager</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'movies' %}">Movies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'movie-add' %}">Movie Add</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'people' %}">People</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'person-add' %}">Person Add</a>
+                </li>
+            </div>
+            <div class="d-flex flex-row">
+                {% if not user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'signin' %}">Sign in</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'signup' %}">Sign up</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'admin-panel-user-mng' %}">Admin panel</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+                {% endif %}
+            </div>
+        </ul>
+    </nav>
+</header>
+{% endblock header %}

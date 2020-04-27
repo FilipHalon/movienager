@@ -1,0 +1,20 @@
+{% extends 'bases/base.html' %}
+
+{% block title %}
+    Delete the user
+{% endblock title %}
+
+{% block main %}
+    <section class="container d-flex justify-content-center">
+        <form rm method="post">
+            {% csrf_token %}
+            <div class="row mt-5">
+                <p class="lead">Are you sure you want to delete the {% block object_name %}user{% endblock object_name %} {{ object }}?</h2>
+            </div>
+            <div class="row">
+                <button type="submit" class="mr-2 btn btn-outline-danger">Yes, delete</button>
+                <a href={% block redirect_to %}{% url 'admin-panel-user-mng' %}{% endblock redirect_to %} class="btn btn-outline-primary">No, let's not delete</a>
+            </div>
+        </form>
+    </section>
+{% endblock main %}

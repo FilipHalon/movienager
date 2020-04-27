@@ -1,0 +1,68 @@
+{% extends 'bases/base.html' %}
+
+{% load widget_tweaks %}
+
+{% block title %}
+    User Management
+{% endblock title %}
+
+{% block main %}
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+    <table>
+        {% include 'partials/user-list-colnames.html' with management_view=True %}
+        <tbody>
+            {% for user in users %}
+                <form action="" method="POST">
+                {% csrf_token %}
+                <tr>
+                    <td> {% render_field form.email value=user.email %} </td>
+                    <td> {% render_field form.username value=user.username %} </td>
+                    <td> {% render_field form.first_name value=user.first_name %} </td>
+                    <td> {% render_field form.last_name value=user.last_name %} </td>
+                    <td> {{ user.date_joined }} </td>
+                    <td><input type="checkbox" name="is_staff" id="id_is_staff" {% if user.is_staff %}checked{% endif %}></td>
+                    <td><input type="checkbox" name="is_superuser" id="id_is_superuser" {% if user.is_superuser %}checked{% endif %}></td>
+                    <td>
+                        <select name="user_type" id="id_user_type">
+                            {% for choice in choices %}
+                                <option value="{{ choice.0 }}" {% if user.user_type == choice.0 %}selected{% endif %}>{{ choice.1 }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td><input type="checkbox" name="is_active" id="id_is_active" {% if user.is_active %}checked{% endif %}></td>
+                    <td> {{ user.last_login }} </td>
+                    <td> {% render_field form.password placeholder="Enter a new password." %} </td>
+                    <td><button type="submit" name="edit">Save</button></td>
+                    <td><button type="submit" name="delete" disabled>Delete</button></td>
+                </tr>
+                </form>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% block scripts %}
+    <script type="text/javascript"> window.CSRF_TOKEN = '{{ csrf_token }}';</script>
+    <script>
+        const tbody = document.querySelector("tbody");
+        tbody.addEventListener("click", e => {
+            const target = e.target;
+            if (target.name == "edit" || target.name == "delete") {
+                e.preventDefault();
+                if (target.name == "delete") {
+                }
+                else {
+                    const tr = target.closest("tr");
+                    const form = tr.previousElementSibling.previousElementSibling;
+                    const formData = new FormData(form);
+                    fetch('/user_management', {
+                        method: "POST",
+                        body: formData,
+                        headers: {'X-CSRFToken': window.CSRF_TOKEN}
+                    }).then(res => console.log(res))
+                }
+            }
+        });
+    </script>
+    {% endblock scripts %}
+{% endblock main %}

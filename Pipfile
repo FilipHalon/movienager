@@ -46,6 +46,8 @@ ipython_genutils = "==0.2.0"
 Pillow = "==7.1.1"
 Pygments = "==2.6.1"
 django-star-ratings = "*"
+gunicorn = "*"
+django-heroku = "*"
 
 [requires]
 python_version = "3.7"
